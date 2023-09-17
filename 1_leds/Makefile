@@ -4,4 +4,4 @@ led.bin:led.s
 	arm-none-linux-gnueabihf-objcopy -O binary -S -g led.elf led.bin
 
 clean:
-	rm -rf *.o led.bin led.elf led.dis
+	rm -rf *.o led.elf led.dis load.imx
