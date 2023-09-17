@@ -22,9 +22,8 @@ _start:
 1. Enable all clocks
 */
 
-ldr r1, = 0XFFFFFFFF
-
 ldr r0, = 0X020C4068         /* register CCGR0 */
+ldr r1, = 0XFFFFFFFF
 str r1, [r0]
 
 ldr r0, = 0X020C406C         /* register CCGR1 */
