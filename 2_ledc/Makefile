@@ -15,4 +15,4 @@ ledc.bin : $(objs)
 	arm-none-linux-gnueabihf-gcc -Wall -nostdlib -c -o $@ $<
 
 clean:
-	rm -rf *.o ledc.elf ledc.dis
+	rm -rf *.o ledc.elf ledc.dis ledc.bin load.imx
