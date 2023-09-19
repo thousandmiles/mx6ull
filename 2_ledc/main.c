@@ -88,11 +88,11 @@ int main(void)
 
     while(1)
     {
-        //led_open();
-        //delay(500);
+        led_open();
+        delay(500);
 
         led_close();
-        //delay(500);
+        delay(500);
     }
     return 0;
 }
