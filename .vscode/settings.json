@@ -2,6 +2,7 @@
     "C_Cpp.errorSquiggles": "disabled",
     "files.associations": {
         "bsp_key.h": "c",
-        "bsp_delay.h": "c"
+        "bsp_delay.h": "c",
+        "bsp_clk.h": "c"
     }
 }
