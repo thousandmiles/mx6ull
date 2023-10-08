@@ -3,6 +3,7 @@
     "files.associations": {
         "bsp_key.h": "c",
         "bsp_delay.h": "c",
-        "bsp_clk.h": "c"
+        "bsp_clk.h": "c",
+        "imx6ull.h": "c"
     }
 }
