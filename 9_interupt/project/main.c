@@ -39,7 +39,7 @@ int main(void)
 	{	
 		state = !state;
 		led_switch(LED0, state);
-		delay(500);
+		delayer(500);
 	}
 
 	return 0;
