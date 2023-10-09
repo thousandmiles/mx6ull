@@ -11,7 +11,7 @@ void int_init(void)
 {
     GIC_Init();
     system_irqtable_init();
-    __set_VBAR((uint32_t)0X878000000); /* interupt vector table offset*/
+    __set_VBAR((uint32_t)0X87800000); /* interupt vector table offset*/
 }
 
 /* initialize the interupt service table */
@@ -20,7 +20,7 @@ void system_irqtable_init(void)
     unsigned int i = 0;
     irqNesting = 0;
 
-    for (int i = 0; i < NUMBER_OF_INT_VECTORS; i++)
+    for (i = 0; i < NUMBER_OF_INT_VECTORS; i++)
     {
         system_register_irqhandler((IRQn_Type)i, default_irqhandler, NULL);
     }
@@ -47,7 +47,7 @@ void system_irqhandler(unsigned int giccIar)
     uint32_t intNum = giccIar & 0x3FFUL;  // extract the lower 10 bits
 
     /* Check the ID is whether valid */
-    if (intNum >= NUMBER_OF_INT_VECTORS)
+    if ((intNum >= NUMBER_OF_INT_VECTORS) || (intNum == 1020))
     {
         return;
     }
