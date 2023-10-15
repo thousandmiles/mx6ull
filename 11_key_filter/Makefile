@@ -1,5 +1,5 @@
 CROSS_COMPILE		?= arm-none-linux-gnueabihf-
-TARGET				?= epit
+TARGET				?= keyfilter
 
 CC					:= $(CROSS_COMPILE)gcc
 LD					:= $(CROSS_COMPILE)ld
@@ -15,7 +15,8 @@ INCDIRS 			:=	imx6ull\
 						bsp/key\
 						bsp/exit\
 						bsp/int \
-						bsp/epittimer
+						bsp/epittimer\
+						bsp/keyfilter
 
 SRCDIRS            :=	project\
 						bsp/clk\
@@ -26,7 +27,8 @@ SRCDIRS            :=	project\
 						bsp/key\
 						bsp/exit\
 						bsp/int\
-						bsp/epittimer
+						bsp/epittimer\
+						bsp/keyfilter
 
 INCLUDE    			:= $(patsubst %, -I %, $(INCDIRS))
 
