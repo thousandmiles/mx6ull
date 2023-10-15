@@ -6,6 +6,7 @@
 #include "bsp_int.h"
 #include "bsp_exit.h"
 #include "bsp_epittimer.h"
+#include "bsp_keyfilter.h"
 
 /*
  * @description	: main函数
@@ -14,19 +15,22 @@
  */
 int main(void)
 {
-	//unsigned char state = OFF;
+	unsigned char state = OFF;
 
 	int_init(); 					/* initialize system interrupt		*/
 	imx6u_clkinit();				/* initialize system clock 			*/
 	clk_enable();					/* enable all clocks 				*/
 	led_init();						/* led 								*/
 	beep_init();					/* beep	 							*/
-	key_init();						/* key 								*/
-	epit1_init(0, 66000000*2);		/* clock interrupt					*/
+	//key_init();						/* key 								*/
+	//epit1_init(0, 66000000*2);		/* clock interrupt					*/
+	filterkey_init();				/* key with timer anti-shake*/
 
 	while(1)			
 	{	
-		delayer(100);
+		state = !state;
+		led_switch(LED0, state);
+		delayer(500);
 	}
 
 	return 0;
