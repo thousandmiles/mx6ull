@@ -1,5 +1,5 @@
 CROSS_COMPILE		?= arm-none-linux-gnueabihf-
-TARGET				?= keyfilter
+TARGET				?= delay
 
 CC					:= $(CROSS_COMPILE)gcc
 LD					:= $(CROSS_COMPILE)ld
