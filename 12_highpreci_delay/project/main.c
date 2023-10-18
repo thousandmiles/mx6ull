@@ -24,13 +24,14 @@ int main(void)
 	beep_init();					/* beep	 							*/
 	//key_init();						/* key 								*/
 	//epit1_init(0, 66000000*2);		/* clock interrupt					*/
-	filterkey_init();				/* key with timer anti-shake*/
+	//filterkey_init();				/* key with timer anti-shake*/
+	delay_init();                    /* delay */
 
 	while(1)			
 	{	
 		state = !state;
 		led_switch(LED0, state);
-		delayer(500);
+		delay_ms(3000);
 	}
 
 	return 0;
