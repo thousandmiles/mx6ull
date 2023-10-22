@@ -4,6 +4,11 @@
         "bsp_key.h": "c",
         "bsp_delay.h": "c",
         "bsp_clk.h": "c",
-        "imx6ull.h": "c"
+        "imx6ull.h": "c",
+        "ctype.h": "c",
+        "printf.h": "c",
+        "div64.h": "c",
+        "vsprintf.h": "c",
+        "stdio.h": "c"
     }
 }
