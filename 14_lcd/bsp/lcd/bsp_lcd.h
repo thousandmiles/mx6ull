@@ -48,7 +48,7 @@ void lcd_noreset(void);
 
 void lcd_enable(void);
 
-void video_pllinit(unsigned char loopdivi, unsigned char posydivi);
+//void video_pllinit(unsigned char loopdivi, unsigned char posydivi);
 
 inline void lcd_drawpoint(unsigned short x, unsigned short y, unsigned int color);
 
