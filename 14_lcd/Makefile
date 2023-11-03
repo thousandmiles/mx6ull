@@ -1,5 +1,5 @@
 CROSS_COMPILE		?= arm-none-linux-gnueabihf-
-TARGET				?= uart
+TARGET				?= lcd
 
 CC					:= $(CROSS_COMPILE)gcc
 LD					:= $(CROSS_COMPILE)ld
@@ -20,7 +20,8 @@ INCDIRS 			:=	imx6ull\
 						bsp/int \
 						bsp/epittimer\
 						bsp/keyfilter\
-						bsp/uart
+						bsp/uart\
+						bsp/lcd
 
 SRCDIRS            :=	project\
 						stdio/lib\
@@ -34,7 +35,8 @@ SRCDIRS            :=	project\
 						bsp/int\
 						bsp/epittimer\
 						bsp/keyfilter\
-						bsp/uart
+						bsp/uart\
+						bsp/lcd
 
 INCLUDE    			:= $(patsubst %, -I %, $(INCDIRS))
 
