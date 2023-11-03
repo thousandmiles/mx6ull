@@ -9,6 +9,7 @@
         "printf.h": "c",
         "div64.h": "c",
         "vsprintf.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "bsp_lcd.h": "c"
     }
 }
