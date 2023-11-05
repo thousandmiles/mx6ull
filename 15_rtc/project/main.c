@@ -29,7 +29,7 @@ int main(void)
 	struct rtc_datetime rtcdate;
 	unsigned char state = OFF;
 
-	// 
+	// initialze
 
 	int_init(); 					/* initialize system interrupt		*/
 	imx6u_clkinit();				/* initialize system clock 			*/
