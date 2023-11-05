@@ -21,13 +21,15 @@ unsigned int BACKCOLOR[6] = {LCD_BLUE, LCD_GREEN, LCD_RED, LCD_ORANGE, LCD_BLACK
  */
 int main(void)
 {
-
+	
 	unsigned char key = 0;
 	int t = 0;
 	int i = 3;
 	char buf[160];
 	struct rtc_datetime rtcdate;
 	unsigned char state = OFF;
+
+	// 
 
 	int_init(); 					/* initialize system interrupt		*/
 	imx6u_clkinit();				/* initialize system clock 			*/
