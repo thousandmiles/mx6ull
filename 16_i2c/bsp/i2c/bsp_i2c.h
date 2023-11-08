@@ -13,9 +13,9 @@
 
 enum i2c_direction
 {
-    kI2C_Write = 0;
-    kI2C_Read  = 1;
-}
+    kI2C_Write = 0,
+    kI2C_Read  = 1
+};
 
 struct i2c_transfer
 {
@@ -25,7 +25,7 @@ struct i2c_transfer
     unsigned char subaddresssize;
     unsigned char* volatile data;
     volatile unsigned int datasize;
-}
+};
 
 void i2c_init(I2C_Type* base);
 
