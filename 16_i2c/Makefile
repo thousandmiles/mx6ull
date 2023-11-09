@@ -1,5 +1,5 @@
 CROSS_COMPILE		?= arm-none-linux-gnueabihf-
-TARGET				?= i2c
+TARGET				?= ap3216c
 
 CC					:= $(CROSS_COMPILE)gcc
 LD					:= $(CROSS_COMPILE)ld
@@ -23,7 +23,8 @@ INCDIRS 			:=	imx6ull\
 						bsp/uart\
 						bsp/lcd\
 						bsp/rtc\
-						bsp/i2c
+						bsp/i2c\
+						bsp/ap3216c
 
 SRCDIRS            :=	project\
 						stdio/lib\
@@ -40,7 +41,8 @@ SRCDIRS            :=	project\
 						bsp/uart\
 						bsp/lcd\
 						bsp/rtc\
-						bsp/i2c
+						bsp/i2c\
+						bsp/ap3216c
 
 INCLUDE    			:= $(patsubst %, -I %, $(INCDIRS))
 
