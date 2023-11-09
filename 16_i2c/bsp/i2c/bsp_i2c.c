@@ -6,7 +6,7 @@ void i2c_init(I2C_Type* base)
 {
     base->I2CR &= ~(1<<7);
 
-    base->IFDR = 0x15;
+    base->IFDR = 0x15<<0;
 
     base->I2CR |= (1<<7);
 }
@@ -83,7 +83,7 @@ void i2c_master_write(I2C_Type* base, const unsigned char* buf, unsigned int siz
 
     while (size--)
     {
-        base->I2DR = *(buf++);
+        base->I2DR = *buf++;
 
         while (!(base->I2SR & (1<<1)));             // wait complete
 
@@ -131,7 +131,7 @@ void i2c_master_read(I2C_Type* base, unsigned char* buf, unsigned int size)
         {
             base->I2CR |= (1<<3);
         }
-        *(buf++) = base->I2DR;
+        *buf++ = base->I2DR;
     }
 }
 
