@@ -9,10 +9,89 @@
 #include "bsp_lcdapi.h"
 #include "bsp_rtc.h"
 #include "bsp_ap3216c.h"
+#include "bsp_icm20608.h"
+#include "bsp_spi.h"
 #include "/home/long/src/mx6ull/13_uart/stdio/include/stdio.h"
-
+ 
 
 unsigned int BACKCOLOR[6] = {LCD_BLUE, LCD_GREEN, LCD_RED, LCD_ORANGE, LCD_BLACK, LCD_WHITE};
+
+
+void integer_display(unsigned short x, unsigned short y, unsigned char size, signed int num)
+{
+	char buf[200];
+
+	lcd_fill(x, y, x + 50, y + size, tftlcd_dev.backcolor);
+
+	memset(buf, 0, sizeof(buf));
+
+	if (num < 0)
+	{
+		sprintf(buf, "-%d", -num);
+	}
+	else
+	{
+		sprintf(buf, "%d", num);
+	}
+
+	lcd_show_string(x, y, 50, size, size, buf);
+}
+
+
+void decimals_display(unsigned short x, unsigned short y, unsigned char size, signed int num)
+{
+	signed int integ;
+
+	signed int fract;
+
+	signed int uncomptemp = num;
+
+	char buf[200];
+
+	if (num < 0)
+	{
+		uncomptemp = -uncomptemp;
+	}
+
+	integ = uncomptemp /100;
+
+	fract = uncomptemp % 100;
+
+	memset(buf, 0, sizeof(buf));
+
+	if (num < 0)
+	{
+		sprintf(buf, "-%d.%d", integ, fract);
+	}
+	else
+	{
+		sprintf(buf, "%d.%d", integ, fract);
+	}
+
+	lcd_fill(x, y, x + 60, y + size, tftlcd_dev.backcolor);
+
+	lcd_show_string(x, y, 60, size, size, buf);
+}
+
+
+void imx6ul_hardfpu_enable(void)
+{
+	unsigned int cpacr;
+
+	unsigned int fpexc;
+
+	cpacr = __get_CPACR();
+
+	cpacr = (cpacr & ~(CPACR_ASEDIS_Msk | CPACR_D32DIS_Msk)) | (3UL << CPACR_cp10_Pos) | (3UL << CPACR_cp11_Pos);
+
+	__set_CPACR(cpacr);
+
+	fpexc = __get_FPEXC();
+
+	fpexc |= 0x40000000UL;
+
+	__set_FPEXC(fpexc);
+}
 
 
 /*
@@ -22,13 +101,11 @@ unsigned int BACKCOLOR[6] = {LCD_BLUE, LCD_GREEN, LCD_RED, LCD_ORANGE, LCD_BLACK
  */
 int main(void)
 {
-	
-	unsigned short ir, als, ps;
 
 	unsigned char state = OFF;
 
 	// initialze
-
+	imx6ul_hardfpu_enable();
 	int_init(); 					/* initialize system interrupt		*/
 	imx6u_clkinit();				/* initialize system clock 			*/
     delay_init();
@@ -40,51 +117,105 @@ int main(void)
 
 	tftlcd_dev.forecolor = LCD_RED;
 
-	lcd_show_string(30, 50, 200, 16, 16, (char*)"ALPHA-IMX6UL IIC TEST");
+	lcd_show_string(50, 10, 400, 24, 24, (char*)"ALPHA-IMX6UL SPI TEST");
 
-	lcd_show_string(30, 70, 200, 16, 16, (char*)"AP3216C TEST");
+	lcd_show_string(50, 40, 200, 16, 16, (char*)"ICM20608 TEST");
 
-	lcd_show_string(30, 90, 200, 16, 16, (char*)"ATOM@ALIENTEK");
+	lcd_show_string(50, 60, 200, 16, 16, (char*)"ATOM@ALIENTEK");
 
-	lcd_show_string(30, 110, 200, 16, 16, (char*)"2023/11/09");
+	lcd_show_string(50, 80, 200, 16, 16, (char*)"2023/11/13");
 
 
-	while (ap3216c_init())
+	while (icm20608_init())
 	{
-		lcd_show_string(30, 130, 200, 16, 16, (char*)"AP3216C Check Failed!");
+		lcd_show_string(50, 100, 200, 16, 16, (char*)"ICM20608 Check Failed!");
 
 		delay_ms(500);
 
-		lcd_show_string(30, 130, 200, 16, 16, (char*)"Please Check         ");
+		lcd_show_string(50, 100, 200, 16, 16, (char*)"Please Check         ");
 
 		delay_ms(500);
 	}
 
-	lcd_show_string(30, 130, 200, 16, 16, (char*)"AP3216C Ready!");
 
-	lcd_show_string(30, 160, 200, 16, 16, (char*)"IR: ");
-
-	lcd_show_string(30, 180, 200, 16, 16, (char*)"PS: ");
-
-	lcd_show_string(30, 200, 200, 16, 16, (char*)"ALS: ");
+	lcd_show_string(50, 100, 200, 16, 16, (char*)"ICM20608 Ready!");
 	
+
+
+	lcd_show_string(50, 130, 200, 16, 16, (char*)"accel x: ");
+
+	lcd_show_string(50, 150, 200, 16, 16, (char*)"accel y: ");
+
+	lcd_show_string(50, 170, 200, 16, 16, (char*)"accel z: ");
+
+	lcd_show_string(50, 190, 200, 16, 16, (char*)"gyro  x: ");
+
+	lcd_show_string(50, 210, 200, 16, 16, (char*)"gyro  x: ");
+
+	lcd_show_string(50, 230, 200, 16, 16, (char*)"gyro  z: ");
+
+	lcd_show_string(50, 250, 200, 16, 16, (char*)"temp   : ");
+
+
+
+	lcd_show_string(50 + 181, 130, 200, 16, 16, (char*)"g");
+
+	lcd_show_string(50 + 181, 150, 200, 16, 16, (char*)"g");
+
+	lcd_show_string(50 + 181, 170, 200, 16, 16, (char*)"g");
+
+	lcd_show_string(50 + 181, 190, 200, 16, 16, (char*)"o/s");
+
+	lcd_show_string(50 + 181, 210, 200, 16, 16, (char*)"o/s");
+
+	lcd_show_string(50 + 181, 230, 200, 16, 16, (char*)"o/s");
+
+	lcd_show_string(50 + 181, 250, 200, 16, 16, (char*)"C");
+
+
 	tftlcd_dev.forecolor = LCD_BLUE;
 
-	while (1)
+	while(1)
 	{
-		ap3216c_readdata(&ir, &ps, &als);
 
-		lcd_shownum(30 + 32, 160, ir, 5, 16);
+		icm20608_getdata();
 
-		lcd_shownum(30 + 32, 180, ps, 5, 16);
+		integer_display(50 + 70, 130, 16, icm20608_dev.accel_x_adc);
 
-		lcd_shownum(30 + 32, 200, als, 5, 16);
-		
+		integer_display(50 + 70, 150, 16, icm20608_dev.accel_y_adc);
+
+		integer_display(50 + 70, 170, 16, icm20608_dev.accel_z_adc);
+
+		integer_display(50 + 70, 190, 16, icm20608_dev.gyro_x_adc);
+
+		integer_display(50 + 70, 210, 16, icm20608_dev.gyro_y_adc);
+
+		integer_display(50 + 70, 230, 16, icm20608_dev.gyro_z_adc);
+
+		integer_display(50 + 70, 250, 16, icm20608_dev.temp_adc);
+
+
+
+		integer_display(50 + 70 + 50, 130, 16, icm20608_dev.accel_x_act);
+
+		integer_display(50 + 70 + 50, 150, 16, icm20608_dev.accel_y_act);
+
+		integer_display(50 + 70 + 50, 170, 16, icm20608_dev.accel_z_act);
+
+		integer_display(50 + 70 + 50, 190, 16, icm20608_dev.gyro_x_act);
+
+		integer_display(50 + 70 + 50, 210, 16, icm20608_dev.gyro_y_act);
+
+		integer_display(50 + 70 + 50, 230, 16, icm20608_dev.gyro_z_act);
+
+		integer_display(50 + 70 + 50, 250, 16, icm20608_dev.temp_act);
+
+
+
 		delay_ms(120);
-
 		state = !state;
-
 		led_switch(LED0, state);
+	
 	}
 
 	return 0;
