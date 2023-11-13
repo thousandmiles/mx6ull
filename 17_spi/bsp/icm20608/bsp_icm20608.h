@@ -106,7 +106,7 @@ struct icm20608_dev_struc
 	signed int temp_act;		/* 温度实际值 				*/
 };
 
-struct icm20608_dev_struc icm20608_dev;	/* icm20608设备 */
+extern struct icm20608_dev_struc icm20608_dev;	/* icm20608设备 */
 
 
 /* 函数声明 */

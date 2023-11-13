@@ -2,7 +2,7 @@
 #include "bsp_delay.h"
 #include "bsp_spi.h"
 
-//struct icm20608_dev_struct icm20608_dev;
+struct icm20608_dev_struc icm20608_dev;
 
 unsigned char icm20608_init(void)
 {
