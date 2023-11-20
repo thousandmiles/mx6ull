@@ -68,9 +68,9 @@ int main(void)
 
 	lcd_show_string(50, 60, 200, 16, 16, (char*)"2023/11/20");
 
-	lcd_show_string(50, 90, 400, 16, 16, (char*)"ADC ori Value: 0000%");
+	lcd_show_string(50, 90, 400, 16, 16, (char*)"ADC ori Value: 0000");
 
-	lcd_show_string(50, 110, 400, 16, 16, (char*)"ADC Val Value: 0.00 V%");
+	lcd_show_string(50, 110, 400, 16, 16, (char*)"ADC Val Value: 0.00 V");
 
 	tftlcd_dev.forecolor = LCD_BLUE;
 
