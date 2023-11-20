@@ -1,5 +1,5 @@
 CROSS_COMPILE		?= arm-none-linux-gnueabihf-
-TARGET				?= backlight
+TARGET				?= adc
 
 CC					:= $(CROSS_COMPILE)gcc
 LD					:= $(CROSS_COMPILE)ld
@@ -28,7 +28,8 @@ INCDIRS 			:=	imx6ull\
 						bsp/spi\
 						bsp/icm20608\
 						bsp/touchscreen\
-						bsp/backlight
+						bsp/backlight\
+						bsp/adc
 
 SRCDIRS            :=	project\
 						stdio/lib\
@@ -50,7 +51,8 @@ SRCDIRS            :=	project\
 						bsp/spi\
 						bsp/icm20608\
 						bsp/touchscreen\
-						bsp/backlight
+						bsp/backlight\
+						bsp/adc
 						
 
 INCLUDE    			:= $(patsubst %, -I %, $(INCDIRS))
