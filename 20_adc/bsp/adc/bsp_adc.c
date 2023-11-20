@@ -58,7 +58,7 @@ uint32_t getadc_value(void)
 
     ADC1->HC[0] = (1<<0);
 
-    while (ADC1->HS & (1<<0)) == 0);
+    while ((ADC1->HS & (1<<0)) == 0);
 
     return ADC1->R[0];
 
