@@ -33,9 +33,9 @@ void imx6ul_hardfpu_enable(void)
 
 
 /*
- * @description	: main函数
- * @param 		: 无
- * @return 		: 无
+ * @description	: main function
+ * @param 		: None
+ * @return 		: None
  */
 int main(void)
 {
