@@ -47,8 +47,8 @@ int main(void)
 
 	// initialze
 	imx6ul_hardfpu_enable();
-	int_init(); 					/* initialize system interrupt		*/
-	imx6u_clkinit();				/* initialize system clock 			*/
+	int_init(); 				
+	imx6u_clkinit();			
     delay_init();
 	clk_enable();
 	led_init();
